@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Museos de Argentina</title>
+    <!-- Agrega Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .truncate {
+            display: block;
+            display: -webkit-box;
+            max-width: 100%;
+            height: 80px; 
+            margin: 0 auto;
+            font-size: 14px;
+            line-height: 1.4;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .table tbody tr {
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+
+    {% extends "padre.html" %}
+    {% load static %}
+
+    {% block contenido %}
+    <h1 class="text-center">Museos de Cultura Argentina</h1>
+    <table class="table table-bordered">
+        <thead class="thead-light">
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Dirección</th>
+                <th>Teléfono</th>
+                <th>Descripción</th>
+                <th>Email</th>
+                <th>Depende de</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for museo in museos %}
+                <tr>
+                    <td>{{ museo.id }}</td>
+                    <td><a href="{{ museo.link }}" target="_blank">{{ museo.nombre }}</a></td>
+                    <td>{{ museo.direccion }}</td>
+                    <td>{{ museo.telefono }}</td>
+                    <td><div class="descripcion-museo">{{ museo.descripcion|safe }}</div></td>
+                    <td>{{ museo.email }}</td>
+                    <td>{{ museo.depende_de }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% endblock %}
+</body>
+</html>
